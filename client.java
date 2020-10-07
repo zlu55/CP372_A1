@@ -6,10 +6,12 @@ import javax.swing.border.*;
 public class client{
 	private JFrame frame;
 	private JPanel top, mid, bottom, portPanel, IPPanel, connectPanel,
-		sidePanel, inBoxPanel, outBoxPanel;
-	private JLabel portLabel, IPLabel;
-	private JTextField portTxtField, IPTxtField;
-	private JTextArea outputBox, inputBox;
+		sidePanel, inBoxPanel, outBoxPanel, selectPanel;
+	private JLabel portLabel, IPLabel, ISBNLbl, titleLbl, authorLbl, pubLbl,
+		yearLbl;
+	private JTextField portTxtField, IPTxtField, ISBNTxt, titleTxt, authorTxt,
+		pubTxt, yearTxt;
+	private JTextArea outputBox;
 	private JButton connectButton, sendButton, clearButton;
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
@@ -63,6 +65,10 @@ public class client{
 		//connectButton.addActionListener(new ) //add a llistener
 		connectPanel.add(connectButton);
 		
+		
+		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
+		
+		
 		submitButton = new JRadioButton("Submit");
 		getButton = new JRadioButton("Get");
 		updateButton = new JRadioButton("Update");
@@ -73,10 +79,11 @@ public class client{
 		selections.add(updateButton);
 		selections.add(removeButton);
 		submitButton.setSelected(true);
-		mid.add(submitButton);
-		mid.add(getButton);
-		mid.add(updateButton);
-		mid.add(removeButton);
+		selectPanel = new JPanel();
+		selectPanel.add(submitButton);
+		selectPanel.add(getButton);
+		selectPanel.add(updateButton);
+		selectPanel.add(removeButton);
 		
 		sidePanel = new JPanel();
 		sidePanel.setLayout(new GridLayout(2, 1));
@@ -86,19 +93,41 @@ public class client{
 		//clearButton.addActionListener(new ) //Add listener
 		sidePanel.add(sendButton);
 		sidePanel.add(clearButton);
-		mid.add(sidePanel);
+		selectPanel.setPreferredSize(new Dimension(600, 100));
+		selectPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		selectPanel.add(sidePanel);
+		mid.add(selectPanel);
+		mid.add(Box.createRigidArea(new Dimension(5, 0)));
 		
-		inputBox = new JTextArea();
-		inputBox.setPreferredSize(new Dimension(600, 100));
-		inputBox.setMaximumSize(new Dimension(600, 100));
-		inputBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//inBoxPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		inBoxPanel = new JPanel();
-		inBoxPanel.add(inputBox);
+		inBoxPanel.setLayout(new GridLayout(4, 2));
+		ISBNLbl = new JLabel("ISBN: ");
+		titleLbl = new JLabel("Title: ");
+		pubLbl = new JLabel("Publisher: ");
+		authorLbl = new JLabel("Author: ");
+		yearLbl = new JLabel("Year: ");
+		ISBNTxt = new JTextField();
+		titleTxt = new JTextField();
+		authorTxt = new JTextField();
+		pubTxt = new JTextField();
+		yearTxt = new JTextField();
+		
+		inBoxPanel.add(ISBNLbl);
+		inBoxPanel.add(ISBNTxt);
+		inBoxPanel.add(titleLbl);
+		inBoxPanel.add(titleTxt);
+		inBoxPanel.add(authorLbl);
+		inBoxPanel.add(authorTxt);
+		inBoxPanel.add(pubLbl);
+		inBoxPanel.add(pubTxt);
+		inBoxPanel.add(authorLbl);
+		inBoxPanel.add(authorTxt);
+		inBoxPanel.setPreferredSize(new Dimension(600, 100));
 		mid.add(inBoxPanel);
 		
 		outputBox = new JTextArea();
 		outputBox.setPreferredSize(new Dimension(600, 100));
-		outputBox.setMaximumSize(new Dimension(600, 100));
 		outputBox.setEditable(false);
 		outBoxPanel = new JPanel();
 		outBoxPanel.add(outputBox);
