@@ -152,7 +152,7 @@ public class client{
 	}
 	
 	
-	private void sendInfo(ActionEvent e){
+	private void sendInfo(ActionEvent event){
 		String title = titleTxt.getText();
 		String author = authorTxt.getText();
 		String pub = pubTxt.getText();
@@ -161,7 +161,7 @@ public class client{
 		if(yearTxt.getText().length() > 0){
 			try{
 				year = Integer.parseInt(yearTxt.getText());
-			}catch(NumberFormat e){
+			}catch(Exception e){
 				System.out.println(e);
 			}
 		}else{
@@ -181,10 +181,15 @@ public class client{
 			char[] isbnArr = isbn.toCharArray();
 			for(int i=0; i<12; i++){
 				if(i % 2 == 0){
-					finalNum += isbnArr[i];
+					finalNum += Integer.parseInt(isbnArr[i]+"");
 				}else{
-					finalNum += isbnArr[i] * 3;
+					finalNum += (Integer.parseInt(isbnArr[i]+"") * 3);
 				}
+			}
+			if(finalNum / 10 == 10){
+				return true;
+			}else{
+				return false;
 			}
 		}
 	}
