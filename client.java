@@ -12,6 +12,7 @@ public class client{
 	private JTextField portTxtField, IPTxtField, ISBNTxt, titleTxt, authorTxt,
 		pubTxt, yearTxt;
 	private JTextArea outputBox;
+	private JScrollPane scrollPane;
 	private JButton connectButton, sendButton, clearButton;
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
@@ -32,10 +33,7 @@ public class client{
 		
 		top = new JPanel();
 		mid = new JPanel();
-		bottom = new JPanel();
-		top.setBackground(Color.blue);
-		mid.setBackground(Color.red);
-		bottom.setBackground(Color.green);
+		bottom = new JPanel();		
 		pane.add(top, BorderLayout.NORTH);
 		pane.add(mid, BorderLayout.CENTER);
 		pane.add(bottom, BorderLayout.SOUTH);
@@ -62,13 +60,10 @@ public class client{
 		IPPanel.add(IPTxtField);
 		
 		connectButton = new JButton("Connect/Disconnect");
-		//connectButton.addActionListener(new ) //add a llistener
+		connectButton.addActionListener(this::connect);
 		connectPanel.add(connectButton);
 		
-		
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
-		
-		
 		submitButton = new JRadioButton("Submit");
 		getButton = new JRadioButton("Get");
 		updateButton = new JRadioButton("Update");
@@ -88,31 +83,40 @@ public class client{
 		sidePanel = new JPanel();
 		sidePanel.setLayout(new GridLayout(2, 1));
 		sendButton = new JButton("Send");
-		//sendButton.addActionListener(new ) //Add listener
+		sendButton.addActionListener(this::sendInfo);
 		clearButton = new JButton("Clear");
-		//clearButton.addActionListener(new ) //Add listener
+		clearButton.addActionListener(this::clear);
 		sidePanel.add(sendButton);
 		sidePanel.add(clearButton);
-		selectPanel.setPreferredSize(new Dimension(600, 100));
+		selectPanel.setPreferredSize(new Dimension(350, 75));
+		selectPanel.setMinimumSize(new Dimension(350, 75));
+		selectPanel.setMaximumSize(new Dimension(350, 75));
 		selectPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		selectPanel.add(sidePanel);
 		mid.add(selectPanel);
 		mid.add(Box.createRigidArea(new Dimension(5, 0)));
 		
-		//inBoxPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		inBoxPanel = new JPanel();
-		inBoxPanel.setLayout(new GridLayout(4, 2));
+		inBoxPanel.setLayout(new GridLayout(5, 2));
 		ISBNLbl = new JLabel("ISBN: ");
 		titleLbl = new JLabel("Title: ");
 		pubLbl = new JLabel("Publisher: ");
 		authorLbl = new JLabel("Author: ");
 		yearLbl = new JLabel("Year: ");
-		ISBNTxt = new JTextField();
-		titleTxt = new JTextField();
-		authorTxt = new JTextField();
-		pubTxt = new JTextField();
-		yearTxt = new JTextField();
-		
+		ISBNLbl.setAlignmentY(Component.RIGHT_ALIGNMENT);
+		ISBNTxt = new JTextField("");
+		titleTxt = new JTextField("");
+		authorTxt = new JTextField("");
+		pubTxt = new JTextField("");
+		yearTxt = new JTextField("");
+		ISBNTxt.setPreferredSize(new Dimension(74, 24));
+		titleTxt.setPreferredSize(new Dimension(74, 24));
+		authorTxt.setPreferredSize(new Dimension(74, 24));
+		pubTxt.setPreferredSize(new Dimension(74, 24));
+		yearTxt.setPreferredSize(new Dimension(74, 24));
+		inBoxPanel.setMinimumSize(new Dimension(350, 125));
+		inBoxPanel.setMaximumSize(new Dimension(350, 125));
+		inBoxPanel.setPreferredSize(new Dimension(350, 125));
 		inBoxPanel.add(ISBNLbl);
 		inBoxPanel.add(ISBNTxt);
 		inBoxPanel.add(titleLbl);
@@ -121,23 +125,42 @@ public class client{
 		inBoxPanel.add(authorTxt);
 		inBoxPanel.add(pubLbl);
 		inBoxPanel.add(pubTxt);
-		inBoxPanel.add(authorLbl);
-		inBoxPanel.add(authorTxt);
-		inBoxPanel.setPreferredSize(new Dimension(600, 100));
+		inBoxPanel.add(yearLbl);
+		inBoxPanel.add(yearTxt);
 		mid.add(inBoxPanel);
 		
-		outputBox = new JTextArea();
-		outputBox.setPreferredSize(new Dimension(600, 100));
+		outputBox = new JTextArea("d\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\nssss\n\n\nss");
 		outputBox.setEditable(false);
 		outBoxPanel = new JPanel();
-		outBoxPanel.add(outputBox);
+		scrollPane = new JScrollPane(outputBox);
+		scrollPane.setPreferredSize(new Dimension(620, 200));
+		scrollPane.setMinimumSize(new Dimension(620, 200));
+		scrollPane.setMaximumSize(new Dimension(620, 200));
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		outBoxPanel.add(scrollPane);
 		
 		bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
 		bottom.add(outBoxPanel);
 		
-		
-		
-		frame.setSize(800, 500);
+		frame.setSize(700, 500);
 		frame.setVisible(true);
 	}
+	
+	private void connect(ActionEvent e){
+		
+	}
+	
+	private void sendInfo(ActionEvent e){
+		
+	}
+	
+	private void clear(ActionEvent e){
+		ISBNTxt.setText("");
+		authorTxt.setText("");
+		titleTxt.setText("");
+		pubTxt.setText("");
+		yearTxt.setText("");
+		outputBox.setText("");
+	}
+	
 }
