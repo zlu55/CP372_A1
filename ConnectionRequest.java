@@ -6,15 +6,13 @@ public class ConnectionRequest extends Thread {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
-
-	public void ConnectionRequest(){
-		
-	}
 	
-	public void connect(String IPAddress, int portNum) throws Exception{
+	public void newConnect(String IPAddress, int portNum) throws Exception{
 		socket = new Socket();
 		try{
-			socket.connect(new InetAddress(IPAddress, portNum), 3000);
+			socket.connect(new InetSocketAddress(IPAddress, portNum), 3000);
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new PrintWriter(socket.getOutputStream(), true);
 		}catch(Exception e){
 			System.out.println(e);
 		}
@@ -22,15 +20,14 @@ public class ConnectionRequest extends Thread {
 
     
 
-    private void disconnect() throws IOException {
+    public void disconnect() throws IOException {
         out.close();
         in.close();
         socket.close();
         System.out.println("Disconnected from server.");
-        this.interrupt();
     }
 
-    private void listen() {
+    public void listen() {
         String line, input, output;
 
         try{

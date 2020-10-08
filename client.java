@@ -166,12 +166,21 @@ public class client{
 	}
 	
 	private class connectListener implements ActionListener{
-		public void actionPerformed(ActionEvent e){
+		public void actionPerformed(ActionEvent event){
 			if(connectButton.isSelected() == true){
-				connectionRequest.connect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()));
-				System.out.println("Connected");	
+				try{
+					connectionRequest.newConnect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()));
+					System.out.println("Connected");
+				}catch(Exception e){
+					System.out.println(e);
+				}
 			}else{
-				System.out.println("Disconnected");
+				try{
+					connectionRequest.disconnect();
+					System.out.println("Disconnected");
+				}catch(Exception e){
+					System.out.println(e);
+				}
 			}
 		}
 	}

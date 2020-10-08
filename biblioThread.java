@@ -30,9 +30,7 @@ public class biblioThread extends Thread{
 	}
 	
 	public void disconnect(){
-		in.close();
-		out.close();
-		socket.close();
+		
 	}
 	
 	
