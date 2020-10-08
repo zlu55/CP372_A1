@@ -178,8 +178,13 @@ public class client{
 			return false;
 		}else{
 			int finalNum = 0;
+			char[] isbnArr = isbn.toCharArray();
 			for(int i=0; i<12; i++){
-				
+				if(i % 2 == 0){
+					finalNum += isbnArr[i];
+				}else{
+					finalNum += isbnArr[i] * 3;
+				}
 			}
 		}
 	}
