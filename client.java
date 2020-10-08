@@ -17,15 +17,17 @@ public class client{
 	private JButton sendButton, clearButton;
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
-	//private final ConnectionRequest connectionRequest;
+	private ConnectionRequest connectionRequest;
 	
 	
 	public static void main(String[] args){
 		client newClient = new client();
 		newClient.setUpGUI();
+		
 	}
 	
 	public void setUpGUI(){
+		connectionRequest = new ConnectionRequest();
 		frame = new JFrame("CP372 A1 - Zachary Luloff/Mitchell Mactaggart");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -48,22 +50,22 @@ public class client{
 		top.add(connectPanel);
 		
 		portLabel = new JLabel("Port: ");
-		portTxtField = new JTextField("");
+		portTxtField = new JTextField("3000");
 		portTxtField.setPreferredSize(new Dimension(60, 24));
 		portTxtField.setMaximumSize(new Dimension(60, 24));
 		portPanel.add(portLabel);
 		portPanel.add(portTxtField);
 		
 		IPLabel = new JLabel("IP: ");
-		IPTxtField = new JTextField("");
-		IPTxtField.setPreferredSize(new Dimension(74, 24));
-		IPTxtField.setMaximumSize(new Dimension(74, 24));
+		IPTxtField = new JTextField("127.0.0.1");
+		IPTxtField.setPreferredSize(new Dimension(90, 24));
+		IPTxtField.setMaximumSize(new Dimension(90, 24));
 		IPPanel.add(IPLabel);
 		IPPanel.add(IPTxtField);
 		
 		connectButton = new JToggleButton("Connect/Disconnect");
 		connectButton.setSelected(false);
-		connectButton.addActionListener(this::connect);
+		connectButton.addActionListener(new connectListener());
 		connectPanel.add(connectButton);
 		
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
@@ -149,13 +151,6 @@ public class client{
 		frame.setVisible(true);
 	}
 	
-	private void connect(ActionEvent e){
-		if(connectButton.isSelected() == true){
-			connectButton.setBackground(Color.green);
-		}else if(connectButton.isSelected() == false){
-			connectButton.setBackground(Color.red);
-		}
-	}
 	
 	private void sendInfo(ActionEvent e){
 		
@@ -168,6 +163,17 @@ public class client{
 		pubTxt.setText("");
 		yearTxt.setText("");
 		outputBox.setText("");
+	}
+	
+	private class connectListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if(connectButton.isSelected() == true){
+				connectionRequest.connect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()));
+				System.out.println("Connected");	
+			}else{
+				System.out.println("Disconnected");
+			}
+		}
 	}
 	
 }

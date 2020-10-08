@@ -2,28 +2,25 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-public class ConnectionThread extends Thread {
-    private final Socket socket;
-    private final ArrayList<book> newBook;
-    private BufferReader in;
+public class ConnectionRequest extends Thread {
+    private Socket socket;
+    private BufferedReader in;
     private PrintWriter out;
 
-    public ConnectionThread(String client, Socket socket, ArrayList<book> newBook){
-        super(client);
-        this.socket = socket;
-        this.newBook = newBook;
-    }
+	public void ConnectionRequest(){
+		
+	}
+	
+	public void connect(String IPAddress, int portNum) throws Exception{
+		socket = new Socket();
+		try{
+			socket.connect(new InetAddress(IPAddress, portNum), 3000);
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
 
-    public void run() {
-        try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-            listen();
-            disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
 
     private void disconnect() throws IOException {
         out.close();
@@ -63,7 +60,7 @@ public class ConnectionThread extends Thread {
 
     private String clientRequest(String[] data) {
         final String request = data[0].trim();
-        
+        /*
         if(request == "SUBMIT"){
             return //submitfunction
         }
@@ -77,7 +74,8 @@ public class ConnectionThread extends Thread {
             return //removefunction
         }else{
             return "ERROR: Invalid request(Valid Requests: SUBMIT, GET, UPDATE, REMOVE)";
-        }
+        }*/
+		return "";
     }
 
 }

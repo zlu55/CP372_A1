@@ -1,8 +1,8 @@
 public class book{
-	private string ISBN = "";
-	private string title = "";
-	private string author = "";
-	private string publisher = "";
+	private String ISBN = "";
+	private String title = "";
+	private String author = "";
+	private String publisher = "";
 	private int year = 0;
 	
 	public String getISBN(){

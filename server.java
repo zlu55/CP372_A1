@@ -2,17 +2,15 @@ import java.io.* ;
 import java.net.* ;
 import java.util.* ;
 
-public class Server {
+public class server {
     public static void main(String argv[]) throws Exception{
         int port;
 
         //Get Port value
-        if(argv.length == 0)
-        {
+        if(argv.length == 0){
             port = 3000;//default port set to 3000 if no port entered
         }
-        else
-        {
+        else{
             port = Integer.parseInt(argv[0]);
         }
 
@@ -21,10 +19,9 @@ public class Server {
 
         System.out.println("Server starting.");
 
-        while(true) 
-        {
+        while(true){
             Socket connection = socket.accept();
-            ConnectionRequest serverThread = new ConnectionRequest(Thread.activeCount() + "", connection, bookList);
+            biblioThread serverThread = new biblioThread(Thread.activeCount() + "", connection, bookList);
             serverThread.start();
             System.out.println("Connection Granted.");
         }
