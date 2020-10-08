@@ -153,7 +153,35 @@ public class client{
 	
 	
 	private void sendInfo(ActionEvent e){
-		
+		String title = titleTxt.getText();
+		String author = authorTxt.getText();
+		String pub = pubTxt.getText();
+		int year;
+		String ISBN;
+		if(yearTxt.getText().length() > 0){
+			try{
+				year = Integer.parseInt(yearTxt.getText());
+			}catch(NumberFormat e){
+				System.out.println(e);
+			}
+		}else{
+			year = 0;
+		}
+		ISBN = ISBNTxt.getText().replace("-", "");
+		if(checkISBNValid(ISBN) == false){
+			outputBox.setText("Incorrect ISBN");
+		}
+	}
+	
+	private boolean checkISBNValid(String isbn){
+		if(isbn.length() != 13){
+			return false;
+		}else{
+			int finalNum = 0;
+			for(int i=0; i<12; i++){
+				
+			}
+		}
 	}
 	
 	private void clear(ActionEvent e){

@@ -19,7 +19,6 @@ public class ConnectionRequest extends Thread {
 	}
 
     
-
     public void disconnect() throws IOException {
         out.close();
         in.close();
