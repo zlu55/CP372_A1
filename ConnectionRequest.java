@@ -36,20 +36,15 @@ public class ConnectionThread extends Thread {
     private void listen() {
         String line, input, output;
 
-        try 
-        {
+        try{
             line = in.readLine();
-            while (line != null) 
-            {
+            while (line != null){
                 input = "";
 
                 if (line.equals("in")) {
                     output = "out";
-                }
-                else 
-                {
-                    while (!line.contains("\\EOF")) 
-                    {
+                }else{
+                    while (!line.contains("\\EOF")){
                         input = input.concat(line + "\r\n");
                         line = in.readLine();
                     }
@@ -61,8 +56,7 @@ public class ConnectionThread extends Thread {
                 line = in.readLine();
             }
         } 
-        catch (IOException exception) 
-        {
+        catch (IOException exception){
             exception.printStackTrace();
         }
     }
@@ -70,24 +64,18 @@ public class ConnectionThread extends Thread {
     private String clientRequest(String[] data) {
         final String request = data[0].trim();
         
-        if(request == "SUBMIT") 
-        {
+        if(request == "SUBMIT"){
             return //submitfunction
         }
-        if(request == "GET")
-        {
+        if(request == "GET"){
             return //getfunction
         }
-        if(request == "UPDATE")
-        {
+		if(request == "UPDATE"){
             return //updatefunction
         }
-        if(request == "REMOVE")
-        {
+		if(request == "REMOVE"){
             return //removefunction
-        }
-        else
-        {
+        }else{
             return "ERROR: Invalid request(Valid Requests: SUBMIT, GET, UPDATE, REMOVE)";
         }
     }

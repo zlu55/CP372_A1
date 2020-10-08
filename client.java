@@ -17,6 +17,7 @@ public class client{
 	private JButton sendButton, clearButton;
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
+	//private final ConnectionRequest connectionRequest;
 	
 	
 	public static void main(String[] args){
@@ -61,6 +62,7 @@ public class client{
 		IPPanel.add(IPTxtField);
 		
 		connectButton = new JToggleButton("Connect/Disconnect");
+		connectButton.setSelected(false);
 		connectButton.addActionListener(this::connect);
 		connectPanel.add(connectButton);
 		
@@ -148,7 +150,11 @@ public class client{
 	}
 	
 	private void connect(ActionEvent e){
-		
+		if(connectButton.isSelected() == true){
+			connectButton.setBackground(Color.green);
+		}else if(connectButton.isSelected() == false){
+			connectButton.setBackground(Color.red);
+		}
 	}
 	
 	private void sendInfo(ActionEvent e){
