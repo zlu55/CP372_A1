@@ -13,7 +13,8 @@ public class client{
 		pubTxt, yearTxt;
 	private JTextArea outputBox;
 	private JScrollPane scrollPane;
-	private JButton connectButton, sendButton, clearButton;
+	private JToggleButton connectButton;
+	private JButton sendButton, clearButton;
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
 	
@@ -59,7 +60,7 @@ public class client{
 		IPPanel.add(IPLabel);
 		IPPanel.add(IPTxtField);
 		
-		connectButton = new JButton("Connect/Disconnect");
+		connectButton = new JToggleButton("Connect/Disconnect");
 		connectButton.addActionListener(this::connect);
 		connectPanel.add(connectButton);
 		
@@ -129,7 +130,7 @@ public class client{
 		inBoxPanel.add(yearTxt);
 		mid.add(inBoxPanel);
 		
-		outputBox = new JTextArea("d\n\n\n\n\n\n\n\n\n\nd\n\n\n\n\n\nssss\n\n\nss");
+		outputBox = new JTextArea("");
 		outputBox.setEditable(false);
 		outBoxPanel = new JPanel();
 		scrollPane = new JScrollPane(outputBox);

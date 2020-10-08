@@ -16,7 +16,7 @@ public class Server {
             port = Integer.parseInt(argv[0]);
         }
 
-        ArrayList<book> newBook = new ArrayList<book>();
+        ArrayList<book> bookList = new ArrayList<book>();
         ServerSocket socket = new ServerSocket(port);
 
         System.out.println("Server starting.");
@@ -24,7 +24,7 @@ public class Server {
         while(true) 
         {
             Socket connection = socket.accept();
-            ConnectionRequest serverThread = new ConnectionRequest(Thread.activeCount() + "", connection, newBook);
+            ConnectionRequest serverThread = new ConnectionRequest(Thread.activeCount() + "", connection, bookList);
             serverThread.start();
             System.out.println("Connection Granted.");
         }
