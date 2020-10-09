@@ -86,7 +86,7 @@ public class biblioThread extends Thread{
 	
 	public String getBook(String[] data){
         StringBuilder output = new StringBuilder();
-        ArrayList<ArrayList<book>> allbookList = new ArrayList<>();
+        ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
 
         for (String input : data) {
             input = input.trim();
@@ -94,12 +94,12 @@ public class biblioThread extends Thread{
             String key = input.substring(clientIn[0].length()).trim();
             
             if(clientIn[0] == "ISBN" || clientIn[0] == "TITLE" || clientIn[0] == "AUTHOR"|| clientIn[0] == "PUBLISHER" || clientIn[0] == "YEAR" ){
-                if (value.length() > 0){
-                    allBookList.add(findByAttribute(bookList, clientIn[0], value));
+                if (key.length() > 0){
+                    allBookList.add(findByAttribute(bookList, clientIn[0], key));
                 }
             }else if(clientIn[0] == "YEAR" ){
-                if (Integer.parseInt(value) > 0){
-                    allBookList.add(findByAttribute(bookList, "YEAR", value));
+                if (Integer.parseInt(key) > 0){
+                    allBookList.add(findByAttribute(bookList, "YEAR", key));
                 }
             }else if(clientIn[0] == "ALL"){
                 if(bookList.size() == 0){
