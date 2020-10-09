@@ -92,7 +92,7 @@ public class biblioThread extends Thread{
             }
         }else{
             for(book b : bookList){
-                if(b.getTitle().equals(data[2].trim())){
+                if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
@@ -100,17 +100,17 @@ public class biblioThread extends Thread{
                             }
                         }
                     }
-                }else if(b.getAuthor().equals(data[3].trim())){
+                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
                     if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                         if(yr == 0 || b.getYear() == yr){
                             outputBook = outputBook + b.toString() + "\n";
                         }
                     }
-                }else if(b.getPublisher().equals(data[4].trim())){
+                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
                     if(yr == 0 || b.getYear() == yr){
                         outputBook = outputBook + b.toString() + "\n";
                     }
-                }else if(b.getYear() == (yr)){
+                }else if(yr != 0 && b.getYear() == (yr)){
                     outputBook = outputBook + b.toString() + "\n";
                 }else{
                     return "Sorry, No books exist in the Library with those attributes.";
@@ -152,39 +152,42 @@ public class biblioThread extends Thread{
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
         if(checkISBN(data[1].trim())){
-            for(book b : booklist){
+            for(book b : bookList){
                 outputBook = b.toString();
             }
         }else{
-            for(book b : booklist){
-                if(b.getTitle().equals(data[2].trim())){
+            for(book b : bookList){
+                if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
-                                outputBook = outputBook + b.toString() + "\n";
+                                bookList.remove(b);
+                                deleted++;
                             }
                         }
                     }
-                }else if(b.getAuthor().equals(data[3].trim())){
+                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
                     if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                         if(yr == 0 || b.getYear() == yr){
-                            outputBook = outputBook + b.toString() + "\n";
+                            bookList.remove(b);
+                            deleted++;
                         }
                     }
-                }else if(b.getPublisher().equals(data[4].trim())){
+                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
                     if(yr == 0 || b.getYear() == yr){
-                        outputBook = outputBook + b.toString() + "\n";
+                        bookList.remove(b);
+                        deleted++;
                     }
-                }else if(b.getYear().equals(yr)){
-                    outputBook = outputBook + b.toString() + "\n";
+                }else if(yr != 0 && b.getYear().equals(yr)){
+                    bookList.remove(b);
+                    deleted++;
                 }else{
-                    return "Sorry, No books exist in the Library with those attributes.";
+                    return "Sorry, No books exist in the Library with those attributes. 0 book(s) removed.";
                 }
             }
         }
 
-	
-        output = deleted + " book(s) removed";
+        output = deleted + " book(s) removed.";
         return output;
 
     }
