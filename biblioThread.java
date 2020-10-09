@@ -87,11 +87,11 @@ public class biblioThread extends Thread{
         String outputBook = "";
         int yr = Integer.parseInt(data[5].trim());
         if(checkISBN(data[1].trim())){
-            for(book b : booklist){
+            for(book b : bookList){
                 outputBook = b.toString();
             }
         }else{
-            for(book b : booklist){
+            for(book b : bookList){
                 if(b.getTitle().equals(data[2].trim())){
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
@@ -119,17 +119,7 @@ public class biblioThread extends Thread{
         }
             return outputBook;
     }
-/*
-        ArrayList<book> search = search(allBookList);
-        if (search == null)
-            return "No books found.";
-        for (book newBook : search) {
-            output.append(newBook.toString());
-            output.append("\r\n");
-        }
-*/
-        return output.toString();
-	}
+
 	
 	public String updateBook(String[] data){
 		String updatedBook = "";
