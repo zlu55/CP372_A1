@@ -84,33 +84,30 @@ public class biblioThread extends Thread{
 	}
 	
 	public String getBook(String[] data){
-        StringBuilder output = new StringBuilder();
-        ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
-
-
-        for (String input : data) {
-            input = input.trim();
-            String[] clientIn = input.split(" ");
-            String key = input.substring(clientIn[0].length()).trim();
-            
-            if(clientIn[0] == "ISBN" || clientIn[0] == "TITLE" || clientIn[0] == "AUTHOR"|| clientIn[0] == "PUBLISHER" || clientIn[0] == "YEAR" ){
-                if (key.length() > 0){
-                    allBookList.add(findByAttribute(bookList, clientIn[0], key));
-                }
-            }else if(clientIn[0] == "YEAR" ){
-                if (Integer.parseInt(key) > 0){
-                    allBookList.add(findByAttribute(bookList, "YEAR", key));
-                }
-            }else if(clientIn[0] == "ALL"){
-                if(bookList.size() == 0){
-                    return "Book List empty.";
-                }
-                for(book newBook : bookList){
-                    output.append(newBook.toString());
-                    output.append("\r\n");
+        String outputBook = "";
+        int yr = Integer.parseInt(data[5].trim());
+        if(checkISBN(data[1].trim())){
+            for(book b : booklist){
+                outputBook = b.toString();
+            }
+        }else{
+            for(book b : booklist){
+                if(b.getTitle().equals(data[2].trim())){
+                    outputBook = outputBook + b.toString() + "\n";
+                }else if(b.getAuthor().equals(data[3].trim())){
+                    outputBook = outputBook + b.toString() + "\n";
+                }else if(b.getPublisher().equals(data[4].trim())){
+                    outputBook = outputBook + b.toString() + "\n";
+                }else if(b.getYear().equals(yr))
+                    outputBook = outputBook + b.toString() + "\n";
+                }else{
+                    return "Sorry, No books exist in the Library with those attributes.";
                 }
             }
+            return outputBook;
+
         }
+    }
 /*
         ArrayList<book> search = search(allBookList);
         if (search == null)
