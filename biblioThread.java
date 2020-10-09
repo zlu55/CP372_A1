@@ -196,7 +196,8 @@ public class biblioThread extends Thread{
             }
         }
 
-        output = deleted + " book(s) removed.";
+        output = deleted + " book(s) removed";
+
         return output;
 
     }
