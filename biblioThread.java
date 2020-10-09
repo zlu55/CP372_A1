@@ -110,15 +110,14 @@ public class biblioThread extends Thread{
                     if(yr == 0 || b.getYear() == yr){
                         outputBook = outputBook + b.toString() + "\n";
                     }
-                }else if(b.getYear().equals(yr))
+                }else if(b.getYear().equals(yr)){
                     outputBook = outputBook + b.toString() + "\n";
                 }else{
                     return "Sorry, No books exist in the Library with those attributes.";
                 }
             }
-            return outputBook;
-
         }
+            return outputBook;
     }
 /*
         ArrayList<book> search = search(allBookList);
