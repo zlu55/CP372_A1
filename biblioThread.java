@@ -202,8 +202,6 @@ public class biblioThread extends Thread{
 
     }
 	
-    bookList.remove(b);                
-    deleted++;
 	public boolean checkISBN(String ISBN){
 		for(book b : bookList){
 			if(b.getISBN().equals(ISBN)){
