@@ -81,12 +81,11 @@ public class biblioThread extends Thread{
 		}else{
 			return "Sorry. That ISBN is already in the library";
 		}
-		
 	}
 	
 	public String getBook(String[] data){
         StringBuilder output = new StringBuilder();
-        ArrayList<ArrayList<book>> allbookList = new ArrayList<>();
+        ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
 
 
         for (String input : data) {
@@ -112,7 +111,7 @@ public class biblioThread extends Thread{
                 }
             }
         }
-
+/*
         ArrayList<book> search = search(allBookList);
         if (search == null)
             return "No books found.";
@@ -120,19 +119,35 @@ public class biblioThread extends Thread{
             output.append(newBook.toString());
             output.append("\r\n");
         }
-
+*/
         return output.toString();
 	}
 	
 	public String updateBook(String[] data){
-		for(book b : bookList){
-			if(checkISBN(data[1].trim())){
-				if(b.getTitle().equals("")){
-					b.setTitle(data[2].trim());
+		String updatedBook = "";
+		if(checkISBN(data[1].trim())){
+			for(book b : bookList){
+				if(checkISBN(data[1].trim())){
+					if(!(data[2].trim()).equals("") && !b.getTitle().equals((data[2].trim()))){
+						b.setTitle(data[2].trim());
+					}
+					if(!(data[3].trim()).equals("") && !b.getAuthor().equals((data[3].trim()))){
+						b.setAuthor(data[3].trim());
+					}
+					if(!(data[4].trim()).equals("") && !b.getPublisher().equals((data[4].trim()))){
+						b.setPublisher(data[4].trim());
+					}
+					int yr = Integer.parseInt(data[5].trim());
+					if(yr != 0 && b.getYear() != yr){
+						b.setYear(yr);
+					}
 				}
+				updatedBook = b.toString();
 			}
+			return "Book updated\n" + updatedBook;
+		}else{
+			return "Sorry, that ISBN is not in the library";
 		}
-		return "Book updated";
 	}
 	
 	
@@ -140,7 +155,7 @@ public class biblioThread extends Thread{
         String output = "Book removed";
         int deleted = 0;
         ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
-        for (String input : data) {
+        /*for (String input : data) {
             input = input.trim();
             String[] clientIn = input.split(" ");
             String key = input.substring(clientIn[0].length()).trim();
@@ -159,7 +174,7 @@ public class biblioThread extends Thread{
             for (book newBook : search) {
                 allBooks.remove(book);
                 deleted++;
-            }
+            }*/
         output = deleted + " book(s) removed";
         return output;
 
@@ -175,9 +190,9 @@ public class biblioThread extends Thread{
 	}
 
 	
-    public static ArrayList<book> findByAttribute(ArrayList<newBook> allBooks, String attribute, String value) {
+    public static ArrayList<book> findByAttribute(ArrayList<book> allBooks, String attribute, String value) {
         ArrayList<book> foundSet = new ArrayList<>();
-        for (book newBook : allBooks) {
+        /*for (book newBook : allBooks) {
             switch (attribute) {
                 case "ISBN":
                     if (newBook.getISBN().equals(value))
@@ -202,7 +217,7 @@ public class biblioThread extends Thread{
             }
         }
         if (foundSet.size() == 0)
-            return null;
+            return null;*/
         return foundSet;
     }
 }
