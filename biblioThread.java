@@ -86,13 +86,9 @@ public class biblioThread extends Thread{
 	public String getBook(String[] data){
         String outputBook = "";
         int yr = Integer.parseInt(data[5].trim());
-        if(checkISBN(data[1].trim())){
-            for(book b : bookList){
-                outputBook = b.toString();
-            }
-        }else{
-            for(book b : bookList){
-                if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+        for(book b : bookList){
+            if(checkISBN(data[1].trim())){
+                if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
@@ -100,21 +96,29 @@ public class biblioThread extends Thread{
                             }
                         }
                     }
-                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                }
+            }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+                if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                     if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                         if(yr == 0 || b.getYear() == yr){
                             outputBook = outputBook + b.toString() + "\n";
                         }
                     }
-                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                }
+            }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                     if(yr == 0 || b.getYear() == yr){
                         outputBook = outputBook + b.toString() + "\n";
                     }
-                }else if(yr != 0 && b.getYear() == (yr)){
-                    outputBook = outputBook + b.toString() + "\n";
-                }else{
-                    return "Sorry, No books exist in the Library with those attributes.";
                 }
+            }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                if(yr == 0 || b.getYear() == yr){
+                    outputBook = outputBook + b.toString() + "\n";
+                }
+            }else if(yr != 0 && b.getYear() == (yr)){
+                outputBook = outputBook + b.toString() + "\n";
+            }else{
+                return "Sorry, No books exist in the Library with those attributes.";
             }
         }
         return outputBook;
@@ -151,39 +155,44 @@ public class biblioThread extends Thread{
         String output = "Book removed";
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
-        if(checkISBN(data[1].trim())){
-            for(book b : bookList){
-                output = b.toString();
-            }
-        }else{
-            for(book b : bookList){
-                if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+        for(book b : bookList){
+            if(checkISBN(data[1].trim())){
+                if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
-                                bookList.remove(b);
+                                bookList.remove(b);                
                                 deleted++;
                             }
                         }
                     }
-                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                }
+            }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+                if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                     if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                         if(yr == 0 || b.getYear() == yr){
-                            bookList.remove(b);
+                            bookList.remove(b);                
                             deleted++;
                         }
                     }
-                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                }
+            }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                     if(yr == 0 || b.getYear() == yr){
-                        bookList.remove(b);
+                        bookList.remove(b);                
                         deleted++;
                     }
-                }else if(yr != 0 && b.getYear() != yr){
-                    bookList.remove(b);
-                    deleted++;
-                }else{
-                    return "Sorry, No books exist in the Library with those attributes. 0 book(s) removed.";
                 }
+            }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                if(yr == 0 || b.getYear() == yr){
+                    bookList.remove(b);                
+                    deleted++;
+                }
+            }else if(yr != 0 && b.getYear() == (yr)){
+                bookList.remove(b);                
+                deleted++;
+            }else{
+                return "Sorry, No books exist in the Library with those attributes.";
             }
         }
 
@@ -193,6 +202,8 @@ public class biblioThread extends Thread{
 
     }
 	
+    bookList.remove(b);                
+    deleted++;
 	public boolean checkISBN(String ISBN){
 		for(book b : bookList){
 			if(b.getISBN().equals(ISBN)){
