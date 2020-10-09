@@ -152,7 +152,7 @@ public class biblioThread extends Thread{
 	}
 	
     private String removeBook(String[] data) {
-        String output = "Book removed";
+        String outputBook = "";
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
         for(book b : bookList){
@@ -161,8 +161,7 @@ public class biblioThread extends Thread{
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
-                                bookList.remove(b);                
-                                deleted++;
+                                outputBook = outputBook + b.toString() + "\n";
                             }
                         }
                     }
@@ -171,34 +170,28 @@ public class biblioThread extends Thread{
                 if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                     if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                         if(yr == 0 || b.getYear() == yr){
-                            bookList.remove(b);                
-                            deleted++;
+                            outputBook = outputBook + b.toString() + "\n";
                         }
                     }
                 }
             }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
                 if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                     if(yr == 0 || b.getYear() == yr){
-                        bookList.remove(b);                
-                        deleted++;
+                        outputBook = outputBook + b.toString() + "\n";
                     }
                 }
             }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
                 if(yr == 0 || b.getYear() == yr){
-                    bookList.remove(b);                
-                    deleted++;
+                    outputBook = outputBook + b.toString() + "\n";
                 }
             }else if(yr != 0 && b.getYear() == (yr)){
-                bookList.remove(b);                
-                deleted++;
+                outputBook = outputBook + b.toString() + "\n";
             }else{
                 return "Sorry, No books exist in the Library with those attributes.";
             }
         }
 
-        output = deleted + " book(s) removed";
-
-        return output;
+        return outputBook;
 
     }
 	
