@@ -93,11 +93,23 @@ public class biblioThread extends Thread{
         }else{
             for(book b : booklist){
                 if(b.getTitle().equals(data[2].trim())){
-                    outputBook = outputBook + b.toString() + "\n";
+                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                            if(yr == 0 || b.getYear() == yr){
+                                outputBook = outputBook + b.toString() + "\n";
+                            }
+                        }
+                    }
                 }else if(b.getAuthor().equals(data[3].trim())){
-                    outputBook = outputBook + b.toString() + "\n";
+                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                        if(yr == 0 || b.getYear() == yr){
+                            outputBook = outputBook + b.toString() + "\n";
+                        }
+                    }
                 }else if(b.getPublisher().equals(data[4].trim())){
-                    outputBook = outputBook + b.toString() + "\n";
+                    if(yr == 0 || b.getYear() == yr){
+                        outputBook = outputBook + b.toString() + "\n";
+                    }
                 }else if(b.getYear().equals(yr))
                     outputBook = outputBook + b.toString() + "\n";
                 }else{
