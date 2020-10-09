@@ -54,6 +54,7 @@ public class biblioThread extends Thread{
     }
 	
 	public String dataReturn(String[] data){
+		
 		return "";
 	}
 	
