@@ -18,7 +18,7 @@ public class biblioThread extends Thread{
         try {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
-            //listen();
+            listen();
             //disconnect();
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,15 +33,15 @@ public class biblioThread extends Thread{
             while (line != null){
                 input = "";
 
-                if (line.equals("in")) {
-                    output = "out";
+                if (line.equals("Testing")) {
+                    output = "123";
                 }else{
                     while (!line.contains("\\EOF")){
                         input = input.concat(line + "\r\n");
                         line = in.readLine();
                     }
                     
-                    output = clientRequest(input.split("\n")).trim() + "\r\n\\EOF";
+                    output = dataReturn(input.split("\n")).trim() + "\r\n\\EOF";
                 }
 
                 out.println(output);
@@ -53,10 +53,16 @@ public class biblioThread extends Thread{
         }
     }
 	
+	public String dataReturn(String[] data){
+		return "";
+	}
+	
+	
+	
 	public void disconnect(){
 		
 	}
-	
+	/*
     private String remove(String[] data) {
         String output;
         int deleted = 0;
@@ -68,10 +74,10 @@ public class biblioThread extends Thread{
             String key = line.substring(clientIn[0].length()).trim();
             if(clientIn[0] == "ISBN" || clientIn[0] == "TITLE" || clientIn[0] == "AUTHOR"|| clientIn[0] == "PUBLISHER" || clientIn[0] == "YEAR" )
                 if (value.length() > 0){
-                   bookList.add(Util.findByAttribute(bookList, clientIn[0], key)); 
+                   bookList.add(findByAttribute(bookList, clientIn[0], key)); 
                 }
         }
-        ArrayList<book> intersection = Util.intersection(bookList);
+        ArrayList<book> intersection = intersection(bookList);
         if (intersection != null)
             for (book book : intersection) {
                 bookEntries.remove(book);
@@ -83,25 +89,6 @@ public class biblioThread extends Thread{
 
     }
 
-    private String clientRequest(String[] data) {
-        final String request = data[0].trim();
-        /*
-        if(request == "SUBMIT"){
-            return //submitfunction
-        }
-        else if(request == "GET"){
-            return //getfunction
-        }
-		else if(request == "UPDATE"){
-            return //updatefunction
-        }
-		else if(request == "REMOVE"){
-            return //removefunction
-        }else{
-            return "ERROR: Invalid request(Valid Requests: SUBMIT, GET, UPDATE, REMOVE)";
-        }*/
-		return "";
-    }
 	
     public static ArrayList<BookEntry> findByAttribute(ArrayList<BookEntry> bookEntries, String attribute, String value) {
         ArrayList<BookEntry> foundSet = new ArrayList<>();
@@ -132,6 +119,6 @@ public class biblioThread extends Thread{
         if (foundSet.size() == 0)
             return null;
         return foundSet;
-    }
+    }*/
 }
 

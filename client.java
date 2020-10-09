@@ -153,39 +153,42 @@ public class client{
 	
 	
 	private void sendInfo(ActionEvent event){
-		
-		String title = titleTxt.getText();
-		String author = authorTxt.getText();
-		String pub = pubTxt.getText();
-		int year;
-		String ISBN;
-		if(yearTxt.getText().length() > 0){
-			try{
-				year = Integer.parseInt(yearTxt.getText());
-			}catch(Exception e){
-				System.out.println(e);
+		if(connectionRequest.isConnected()){
+			String title = titleTxt.getText();
+			String author = authorTxt.getText();
+			String pub = pubTxt.getText();
+			int year = 0;
+			String ISBN;
+			if(yearTxt.getText().length() > 0){
+				try{
+					year = Integer.parseInt(yearTxt.getText());
+				}catch(Exception e){
+					System.out.println(e);
+				}
 			}
+			ISBN = ISBNTxt.getText().replace("-", "");
+			if(checkISBNValid(ISBN) == false){
+				outputBox.setText("Incorrect ISBN");
+			}
+			
+			checkRequest(ISBN, title, author, pub, year);
 		}else{
-			year = 0;
-		}
-		ISBN = ISBNTxt.getText().replace("-", "");
-		if(checkISBNValid(ISBN) == false){
-			outputBox.setText("Incorrect ISBN");
+			outputBox.setText("No connection");
 		}
 		
-		checkRequest();
 		
 	}
 	
-	private void checkRequest(){
+	private void checkRequest(String ISBN, String title, String author, String pub, int year){
+		Object[] data = {ISBN, title, author, pub, year};
 		if (submitButton.isSelected() == true){
-			connectionRequest.clientRequest("submit");
+			connectionRequest.clientRequest("submit", data);
 		}else if (getButton.isSelected() == true){
-			connectionRequest.clientRequest("get");
+			connectionRequest.clientRequest("get", data);
 		}else if (updateButton.isSelected() == true){
-			connectionRequest.clientRequest("update");
+			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
-			connectionRequest.clientRequest("remove");
+			connectionRequest.clientRequest("remove", data);
 		}
 	}
 	
@@ -223,7 +226,8 @@ public class client{
 		public void actionPerformed(ActionEvent event){
 			if(connectButton.isSelected() == true){
 				try{
-					if(connectionRequest.newConnect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()))){
+					connectionRequest.newConnect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()));
+					if(connectionRequest.isConnected()){
 						System.out.println("Connected");
 						outputBox.setText("");
 					}else{
