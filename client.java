@@ -19,6 +19,7 @@ public class client{
 	private ButtonGroup selections;
 	private ConnectionRequest connectionRequest;
 	private JOptionPane removeWarning;
+	private JCheckBox allBox;
 	
 	
 	public static void main(String[] args){
@@ -80,11 +81,13 @@ public class client{
 		selections.add(updateButton);
 		selections.add(removeButton);
 		submitButton.setSelected(true);
+		allBox = new JCheckBox("ALL");
 		selectPanel = new JPanel();
 		selectPanel.add(submitButton);
 		selectPanel.add(getButton);
 		selectPanel.add(updateButton);
 		selectPanel.add(removeButton);
+		selectPanel.add(allBox);
 		
 		sidePanel = new JPanel();
 		sidePanel.setLayout(new GridLayout(2, 1));
@@ -94,9 +97,9 @@ public class client{
 		clearButton.addActionListener(this::clear);
 		sidePanel.add(sendButton);
 		sidePanel.add(clearButton);
-		selectPanel.setPreferredSize(new Dimension(350, 75));
-		selectPanel.setMinimumSize(new Dimension(350, 75));
-		selectPanel.setMaximumSize(new Dimension(350, 75));
+		selectPanel.setPreferredSize(new Dimension(390, 75));
+		selectPanel.setMinimumSize(new Dimension(390, 75));
+		selectPanel.setMaximumSize(new Dimension(390, 75));
 		selectPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		selectPanel.add(sidePanel);
 		mid.add(selectPanel);
@@ -195,17 +198,18 @@ public class client{
 		}else if (updateButton.isSelected() == true){
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
-			//removeWarning = new JOptionPane();
-			/*if(removeWarning.showConfirmDialog(
-				null,
-				"Are you sure you want to remove this book?", "",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION){
+			/*removeWarning = new JOptionPane();
+			int result = JOptionPane.showConfirmDialog(
+							null,
+							"Are you sure you want to remove this book?", "",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.WARNING_MESSAGE);
+			if(result == JOptionPane.YES_OPTION){
 					connectionRequest.clientRequest("remove", data);
-			}else{
-				
-			}
-			*/
+			}else if(result == JOptionPane.NO_OPTION){
+				outputBox.setText("Not removed");
+			}*/
+			
 			connectionRequest.clientRequest("remove", data);
 		}
 		 outputBox.setText(connectionRequest.returnedData());
