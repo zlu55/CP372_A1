@@ -153,7 +153,7 @@ public class biblioThread extends Thread{
         int yr = Integer.parseInt(data[5].trim());
         if(checkISBN(data[1].trim())){
             for(book b : bookList){
-                outputBook = b.toString();
+                output = b.toString();
             }
         }else{
             for(book b : bookList){
@@ -178,7 +178,7 @@ public class biblioThread extends Thread{
                         bookList.remove(b);
                         deleted++;
                     }
-                }else if(yr != 0 && b.getYear().equals(yr)){
+                }else if(yr != 0 && b.getYear() != yr){
                     bookList.remove(b);
                     deleted++;
                 }else{
