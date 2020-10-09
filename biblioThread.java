@@ -73,7 +73,7 @@ public class biblioThread extends Thread{
 	}
 	
 	public String submitBook(String[] data){
-		if(checkISBN(data[1].trim()) == false){
+		if(!checkISBN(data[1].trim())){
 			int yr = Integer.parseInt(data[5].trim());
 			book newBook = new book(data[1].trim(), data[2].trim(), data[3].trim(), data[4].trim(), yr);
 			bookList.add(newBook);
@@ -89,6 +89,13 @@ public class biblioThread extends Thread{
 	}
 	
 	public String updateBook(String[] data){
+		for(book b : bookList){
+			if(checkISBN(data[1].trim())){
+				if(b.getTitle().equals("")){
+					b.setTitle(data[2].trim());
+				}
+			}
+		}
 		return "Book updated";
 	}
 	
@@ -122,7 +129,6 @@ public class biblioThread extends Thread{
 	public boolean checkISBN(String ISBN){
 		for(book b : bookList){
 			if(b.getISBN().equals(ISBN)){
-				System.out.println("Found dupe");
 				return true;
 			}
 		}
