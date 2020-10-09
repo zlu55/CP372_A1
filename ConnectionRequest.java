@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-public class ConnectionRequest extends Thread {
+public class connectionRequest extends Thread {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -52,26 +52,6 @@ public class ConnectionRequest extends Thread {
         catch (IOException exception){
             exception.printStackTrace();
         }
-    }
-
-    private String clientRequest(String[] data) {
-        final String request = data[0].trim();
-        /*
-        if(request == "SUBMIT"){
-            return //submitfunction
-        }
-        if(request == "GET"){
-            return //getfunction
-        }
-		if(request == "UPDATE"){
-            return //updatefunction
-        }
-		if(request == "REMOVE"){
-            return //removefunction
-        }else{
-            return "ERROR: Invalid request(Valid Requests: SUBMIT, GET, UPDATE, REMOVE)";
-        }*/
-		return "";
     }
 
 }
