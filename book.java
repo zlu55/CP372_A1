@@ -5,6 +5,17 @@ public class book{
 	private String publisher = "";
 	private int year = 0;
 	
+	public book(){
+	}
+	
+	public book(String ISBN, String title, String author, String pub, int year){
+		this.ISBN = ISBN;
+		this.title = title;
+		this.author = author;
+		this.publisher = pub;
+		this.year = year;
+	}
+	
 	public String getISBN(){
 		return ISBN;
 	}
@@ -48,9 +59,9 @@ public class book{
 	@Override
 	public String toString(){
 		return "ISBN: " + ISBN +
-				"/nTitle: " + title +
-				"/nAuthor: " + author +
-				"/nPublisher: " + publisher +
-				"/nYear: " + year + "n";
+				"\nTitle: " + title +
+				"\nAuthor: " + author +
+				"\nPublisher: " + publisher +
+				"\nYear: " + year + "\n";
 	}
 }

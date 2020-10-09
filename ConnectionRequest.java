@@ -38,9 +38,11 @@ public class ConnectionRequest extends Thread {
 		String returned = "";
 		try{
 			String line = in.readLine();
-			while(line != null){
-				returned += (line + "\n");
+			while(line != null && !line.contains("/END/")){
+				returned = returned.concat(line + "\n");
+				line = in.readLine();
 			}
+			
 		}catch(IOException e){
 			System.out.println("Error");
 		}
@@ -52,22 +54,22 @@ public class ConnectionRequest extends Thread {
         String sentData = "";
         switch(req){
             case "submit":
-				sentData += "SUBMIT";
+				sentData += "SUBMIT\r\n";
 				break;
 			case "get":
-				sentData += "GET";
+				sentData += "GET\r\n";
 				break;
             case "update":
-				sentData += "UPDATE";
+				sentData += "UPDATE\r\n";
 				break;
 			case "remove":
-				sentData += "REMOVE";
+				sentData += "REMOVE\r\n";
 				break;
         }
 		for(int i=0; i<5; i++){
-			sentData += (data[i]+ "\n");
+			sentData += (data[i]+ "\r\n");
 		}
-		out.println(sentData + "\n/END/");
+		out.println(sentData + "\r\n/END/");
     }
 	
 	

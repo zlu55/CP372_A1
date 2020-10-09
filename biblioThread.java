@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class biblioThread extends Thread{
 	private Socket socket;
-    private ArrayList<book> newBook;
+    private ArrayList<book> bookList;
     private BufferedReader in;
     private PrintWriter out;
 	
-	public biblioThread(String client, Socket socket, ArrayList<book> newBook){
+	public biblioThread(String client, Socket socket, ArrayList<book> bookList){
         super(client);
         this.socket = socket;
-        this.newBook = newBook;
+        this.bookList = bookList;
     }
 	
 	public synchronized void run() {
@@ -39,10 +39,8 @@ public class biblioThread extends Thread{
                         input = input.concat(line + "\r\n");
                         line = in.readLine();
                     }
-                    
                     output = dataReturn(input.split("\n")).trim() + "\r\n/END/";
                 }
-
                 out.println(output);
                 line = in.readLine();
             }
@@ -53,8 +51,7 @@ public class biblioThread extends Thread{
     }
 	
 	public String dataReturn(String[] data){
-		String req = data[0];
-		switch(req){
+		switch(data[0].trim()){
 			case "SUBMIT":
 				return submitBook(data);
 			case "GET":
@@ -63,8 +60,10 @@ public class biblioThread extends Thread{
 				return updateBook(data);
 			case "REMOVE":
 				return removeBook(data);
+			default:
+				return "Error returning data";
 		}
-		return "";
+		
 	}
 	
 	public void disconnect() throws IOException{
@@ -74,20 +73,28 @@ public class biblioThread extends Thread{
 	}
 	
 	public String submitBook(String[] data){
-		return "";
+		if(checkISBN(data[1].trim()) == false){
+			int yr = Integer.parseInt(data[5].trim());
+			book newBook = new book(data[1].trim(), data[2].trim(), data[3].trim(), data[4].trim(), yr);
+			bookList.add(newBook);
+			return "Book Submitted\n" + newBook.toString();
+		}else{
+			return "Sorry. That ISBN is already in the library";
+		}
+		
 	}
 	
 	public String getBook(String[] data){
-		return "";
+		return "Book gotten";
 	}
 	
 	public String updateBook(String[] data){
-		return "";
+		return "Book updated";
 	}
 	
 	
     private String removeBook(String[] data) {
-        String output = "";
+        String output = "Book removed";
         /*int deleted = 0;
 
         ArrayList<ArrayList<book>> bookList = new ArrayList<>();
@@ -111,6 +118,16 @@ public class biblioThread extends Thread{
         return output;
 
     }
+	
+	public boolean checkISBN(String ISBN){
+		for(book b : bookList){
+			if(b.getISBN().equals(ISBN)){
+				System.out.println("Found dupe");
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/*
     public static ArrayList<BookEntry> findByAttribute(ArrayList<BookEntry> bookEntries, String attribute, String value) {

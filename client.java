@@ -109,7 +109,7 @@ public class client{
 		authorLbl = new JLabel("Author: ");
 		yearLbl = new JLabel("Year: ");
 		ISBNLbl.setAlignmentY(Component.RIGHT_ALIGNMENT);
-		ISBNTxt = new JTextField("");
+		ISBNTxt = new JTextField("978-1-61268-019-4");/////////////////////////FIX/REMOVE TEST ISBN
 		titleTxt = new JTextField("");
 		authorTxt = new JTextField("");
 		pubTxt = new JTextField("");
@@ -171,18 +171,16 @@ public class client{
 				outputBox.setText("Incorrect ISBN");
 			}
 			
-			if((submitButton.isSelected() == true || updateButton.isSelected() == true) && ISBN.equals(""))
+			if((submitButton.isSelected() == true || updateButton.isSelected() == true) && ISBN.equals("")){
 				outputBox.setText("Enter an ISBN");
-			
-			if(ISBN.equals("") && title.equals("") && author.equals("") && pub.equals("") && year == 0)
+			}else if(ISBN.equals("") && title.equals("") && author.equals("") && pub.equals("") && year == 0){
 				outputBox.setText("Enter something");
-			
-			checkRequest(ISBN, title, author, pub, year);
+			}else{
+				checkRequest(ISBN, title, author, pub, year);
+			}
 		}else{
 			outputBox.setText("No connection");
 		}
-		
-		
 	}
 	
 	private void checkRequest(String ISBN, String title, String author, String pub, int year){
@@ -196,7 +194,7 @@ public class client{
 		}else if (removeButton.isSelected() == true){
 			connectionRequest.clientRequest("remove", data);
 		}
-		outputBox.setText(connectionRequest.returnedData());
+		 outputBox.setText(connectionRequest.returnedData());
 	}
 	
 	private boolean checkISBNValid(String isbn){
