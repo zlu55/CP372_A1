@@ -25,9 +25,33 @@ public class biblioThread extends Thread{
         }
     }
 	
-	public void listen(){
-		
-	}
+	public void listen() {
+        String line, input, output;
+
+        try{
+            line = in.readLine();
+            while (line != null){
+                input = "";
+
+                if (line.equals("in")) {
+                    output = "out";
+                }else{
+                    while (!line.contains("\\EOF")){
+                        input = input.concat(line + "\r\n");
+                        line = in.readLine();
+                    }
+                    
+                    output = clientRequest(input.split("\n")).trim() + "\r\n\\EOF";
+                }
+
+                out.println(output);
+                line = in.readLine();
+            }
+        } 
+        catch (IOException exception){
+            exception.printStackTrace();
+        }
+    }
 	
 	public void disconnect(){
 		

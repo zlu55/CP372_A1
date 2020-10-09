@@ -153,6 +153,7 @@ public class client{
 	
 	
 	private void sendInfo(ActionEvent event){
+		
 		String title = titleTxt.getText();
 		String author = authorTxt.getText();
 		String pub = pubTxt.getText();
@@ -222,17 +223,22 @@ public class client{
 		public void actionPerformed(ActionEvent event){
 			if(connectButton.isSelected() == true){
 				try{
-					connectionRequest.newConnect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()));
-					System.out.println("Connected");
+					if(connectionRequest.newConnect(IPTxtField.getText(), Integer.parseInt(portTxtField.getText()))){
+						System.out.println("Connected");
+						outputBox.setText("");
+					}else{
+						outputBox.setText("Connection unsuccessful");
+					}
 				}catch(Exception e){
-					System.out.println(e);
+					outputBox.setText("Connection unsuccessful");
+					connectButton.setSelected(false);
 				}
 			}else{
 				try{
 					connectionRequest.disconnect();
 					System.out.println("Disconnected");
 				}catch(Exception e){
-					System.out.println(e);
+					outputBox.setText("Connection unsuccessful");
 				}
 			}
 		}
