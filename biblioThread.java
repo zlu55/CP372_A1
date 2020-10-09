@@ -110,26 +110,15 @@ public class biblioThread extends Thread{
                     if(yr == 0 || b.getYear() == yr){
                         outputBook = outputBook + b.toString() + "\n";
                     }
-                }else if(b.getYear().equals(yr)){
+                }else if(b.getYear() == (yr)){
                     outputBook = outputBook + b.toString() + "\n";
                 }else{
                     return "Sorry, No books exist in the Library with those attributes.";
                 }
             }
         }
-            return outputBook;
+        return outputBook;
     }
-/*
-        ArrayList<book> search = search(allBookList);
-        if (search == null)
-            return "No books found.";
-        for (book newBook : search) {
-            output.append(newBook.toString());
-            output.append("\r\n");
-        }
-*/
-        return output.toString();
-	}
 	
 	public String updateBook(String[] data){
 		String updatedBook = "";
@@ -161,37 +150,40 @@ public class biblioThread extends Thread{
     private String removeBook(String[] data) {
         String output = "Book removed";
         int deleted = 0;
-        //ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
-        
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*for (String input : data) {
-            input = input.trim();
-            String[] clientIn = input.split(" ");
-            String key = input.substring(clientIn[0].length()).trim();
-            if(clientIn[0] == "ISBN" || clientIn[0] == "TITLE" || clientIn[0] == "AUTHOR"|| clientIn[0] == "PUBLISHER"){
-                if (value.length() > 0){
-                   allBookList.add(findByAttribute(bookList, clientIn[0], key)); 
-                }
-            }else if(clientIn[0] == "YEAR" ){
-                if (Integer.parseInt(value) > 0){
-                    allBookList.add(findByAttribute(bookList, "YEAR", value));
+        int yr = Integer.parseInt(data[5].trim());
+        if(checkISBN(data[1].trim())){
+            for(book b : booklist){
+                outputBook = b.toString();
+            }
+        }else{
+            for(book b : booklist){
+                if(b.getTitle().equals(data[2].trim())){
+                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                            if(yr == 0 || b.getYear() == yr){
+                                outputBook = outputBook + b.toString() + "\n";
+                            }
+                        }
+                    }
+                }else if(b.getAuthor().equals(data[3].trim())){
+                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                        if(yr == 0 || b.getYear() == yr){
+                            outputBook = outputBook + b.toString() + "\n";
+                        }
+                    }
+                }else if(b.getPublisher().equals(data[4].trim())){
+                    if(yr == 0 || b.getYear() == yr){
+                        outputBook = outputBook + b.toString() + "\n";
+                    }
+                }else if(b.getYear().equals(yr)){
+                    outputBook = outputBook + b.toString() + "\n";
+                }else{
+                    return "Sorry, No books exist in the Library with those attributes.";
                 }
             }
         }
-        ArrayList<book> search = search(allBookList);
-        if (search != null)
-            for (book newBook : search) {
-                allBooks.remove(book);
-                deleted++;
-            }*/
+
+	
         output = deleted + " book(s) removed";
         return output;
 
@@ -206,50 +198,4 @@ public class biblioThread extends Thread{
 		return false;
 	}
 
-	
-    public static ArrayList<book> findByAttribute(ArrayList<book> allBooks, String attribute, String value) {
-        ArrayList<book> foundSet = new ArrayList<>();
-        /*for (book newBook : allBooks) {
-            switch (attribute) {
-                case "ISBN":
-                    if (newBook.getISBN().equals(value))
-                        foundSet.add(newBook);
-                    break;
-                case "TITLE":
-                    if (newBook.getTITLE().equals(value))
-                        foundSet.add(newBook);
-                    break;
-                case "AUTHOR":
-                    if (newBook.getAUTHOR().equals(value))
-                        foundSet.add(newBook);
-                    break;
-                case "PUBLISHER":
-                    if (newBook.getPUBLISHER().equals(value))
-                        foundSet.add(newBook);
-                case "YEAR":
-                    if (Integer.toString(newBook.getYEAR()).equals(value))
-                        foundSet.add(newBook);
-                default:
-                    break;
-            }
-        }
-        if (foundSet.size() == 0)
-            return null;*/
-        return foundSet;
-    }
-
-    public static ArrayList<book> search(ArrayList<ArrayList<book>> allBookList) {
-        ArrayList<book> search = null;
-        for (ArrayList<book> bookList : allBookList) {
-            search = search == null ? bookList : search;
-            if (search == null) break;
-            if (bookList != null)
-                search.retainAll(bookList);
-            else {
-                search = null;
-                break;
-            }
-        }
-        return search;
-    }
 }
