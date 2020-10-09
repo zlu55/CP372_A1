@@ -34,6 +34,9 @@ public class ConnectionRequest extends Thread {
 		}
 	}
 	
+	public String returnedData(){
+		return "";
+	}
 
     public void clientRequest(String req, Object[] data) {
         /*
@@ -52,6 +55,7 @@ public class ConnectionRequest extends Thread {
 				break;
         }*/
     }
+	
 	
 
 }

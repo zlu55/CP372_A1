@@ -171,6 +171,12 @@ public class client{
 				outputBox.setText("Incorrect ISBN");
 			}
 			
+			if((submitButton.isSelected() == true || updateButton.isSelected() == true) && ISBN.equals(""))
+				outputBox.setText("Enter an ISBN");
+			
+			if(ISBN.equals("") && title.equals("") && author.equals("") && pub.equals("") && year == 0)
+				outputBox.setText("Enter something");
+			
 			checkRequest(ISBN, title, author, pub, year);
 		}else{
 			outputBox.setText("No connection");
@@ -190,6 +196,7 @@ public class client{
 		}else if (removeButton.isSelected() == true){
 			connectionRequest.clientRequest("remove", data);
 		}
+		outputBox.setText(connectionRequest.returnedData());
 	}
 	
 	private boolean checkISBNValid(String isbn){
