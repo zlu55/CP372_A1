@@ -18,6 +18,7 @@ public class client{
 	private JRadioButton submitButton, getButton, updateButton, removeButton;
 	private ButtonGroup selections;
 	private ConnectionRequest connectionRequest;
+	private final JOptionPane removeWarning;
 	
 	
 	public static void main(String[] args){
@@ -147,6 +148,11 @@ public class client{
 		bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
 		bottom.add(outBoxPanel);
 		
+		removeWarning = new JOptionPane(
+			"Are you sure you want to remove this book?",
+			JOptionPane.WARNING_MESSAGE,
+			JOptionPane.YES_NO_OPTION);
+		
 		frame.setSize(700, 500);
 		frame.setVisible(true);
 	}
@@ -163,7 +169,7 @@ public class client{
 				try{
 					year = Integer.parseInt(yearTxt.getText());
 				}catch(Exception e){
-					System.out.println(e);
+					outputBox.setText("Year format incorrect");
 				}
 			}
 			ISBN = ISBNTxt.getText().replace("-", "");
@@ -192,6 +198,7 @@ public class client{
 		}else if (updateButton.isSelected() == true){
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
+			
 			connectionRequest.clientRequest("remove", data);
 		}
 		 outputBox.setText(connectionRequest.returnedData());

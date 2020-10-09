@@ -150,12 +150,21 @@ public class biblioThread extends Thread{
 		}
 	}
 	
-	
     private String removeBook(String[] data) {
         String output = "Book removed";
         int deleted = 0;
-        ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
-        /*for (String input : data) {
+        //ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*for (String input : data) {
             input = input.trim();
             String[] clientIn = input.split(" ");
             String key = input.substring(clientIn[0].length()).trim();
