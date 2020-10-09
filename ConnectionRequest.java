@@ -35,25 +35,39 @@ public class ConnectionRequest extends Thread {
 	}
 	
 	public String returnedData(){
-		return "";
+		String returned = "";
+		try{
+			String line = in.readLine();
+			while(line != null){
+				returned += (line + "\n");
+			}
+		}catch(IOException e){
+			System.out.println("Error");
+		}
+		
+		return returned;
 	}
 
     public void clientRequest(String req, Object[] data) {
-        /*
+        String sentData = "";
         switch(req){
             case "submit":
-				submitBook();
+				sentData += "SUBMIT";
 				break;
 			case "get":
-				getBook();
+				sentData += "GET";
 				break;
             case "update":
-				updateBook();
+				sentData += "UPDATE";
 				break;
 			case "remove":
-				removeBook();
+				sentData += "REMOVE";
 				break;
-        }*/
+        }
+		for(int i=0; i<5; i++){
+			sentData += (data[i]+ "\n");
+		}
+		out.println(sentData + "\n/END/");
     }
 	
 	

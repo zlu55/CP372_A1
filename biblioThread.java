@@ -14,7 +14,7 @@ public class biblioThread extends Thread{
         this.newBook = newBook;
     }
 	
-	public void run() {
+	public synchronized void run() {
         try {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
@@ -32,16 +32,15 @@ public class biblioThread extends Thread{
             line = in.readLine();
             while (line != null){
                 input = "";
-
                 if (line.equals("Testing")) {
                     output = "123";
                 }else{
-                    while (!line.contains("\\EOF")){
+                    while (!line.contains("/END/")){
                         input = input.concat(line + "\r\n");
                         line = in.readLine();
                     }
                     
-                    output = dataReturn(input.split("\n")).trim() + "\r\n\\EOF";
+                    output = dataReturn(input.split("\n")).trim() + "\r\n/END/";
                 }
 
                 out.println(output);
@@ -54,19 +53,42 @@ public class biblioThread extends Thread{
     }
 	
 	public String dataReturn(String[] data){
-		
+		String req = data[0];
+		switch(req){
+			case "SUBMIT":
+				return submitBook(data);
+			case "GET":
+				return getBook(data);
+			case "UPDATE":
+				return updateBook(data);
+			case "REMOVE":
+				return removeBook(data);
+		}
+		return "";
+	}
+	
+	public void disconnect() throws IOException{
+		out.close();
+		in.close();
+		socket.close();
+	}
+	
+	public String submitBook(String[] data){
+		return "";
+	}
+	
+	public String getBook(String[] data){
+		return "";
+	}
+	
+	public String updateBook(String[] data){
 		return "";
 	}
 	
 	
-	
-	public void disconnect(){
-		
-	}
-	/*
-    private String remove(String[] data) {
-        String output;
-        int deleted = 0;
+    private String removeBook(String[] data) {
+        String output = "";
+        /*int deleted = 0;
 
         ArrayList<ArrayList<book>> bookList = new ArrayList<>();
         for (String line : data) {
@@ -85,12 +107,12 @@ public class biblioThread extends Thread{
                 deleted++;
             }
 
-        output = deleted + " book(s) removed";
+        output = deleted + " book(s) removed";*/
         return output;
 
     }
 
-	
+	/*
     public static ArrayList<BookEntry> findByAttribute(ArrayList<BookEntry> bookEntries, String attribute, String value) {
         ArrayList<BookEntry> foundSet = new ArrayList<>();
         for (BookEntry bookEntry : bookEntries) {
