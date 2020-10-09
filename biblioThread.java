@@ -87,7 +87,7 @@ public class biblioThread extends Thread{
 	public String getBook(String[] data){
         StringBuilder output = new StringBuilder();
         ArrayList<ArrayList<book>> allbookList = new ArrayList<>();
-
+		/*
         for (String input : data) {
             input = input.trim();
             String[] clientIn = input.split(" ");
@@ -119,7 +119,7 @@ public class biblioThread extends Thread{
             output.append(newBook.toString());
             output.append("\r\n");
         }
-
+*/
         return output.toString();
 	}
 	
@@ -137,7 +137,7 @@ public class biblioThread extends Thread{
 	
     private String removeBook(String[] data) {
         String output = "Book removed";
-        /*int deleted = 0;
+        int deleted = 0;
         ArrayList<ArrayList<book>> allBookList = new ArrayList<>();
         for (String input : data) {
             input = input.trim();
@@ -159,7 +159,7 @@ public class biblioThread extends Thread{
                 allBooks.remove(book);
                 deleted++;
             }
-        output = deleted + " book(s) removed";*/
+        output = deleted + " book(s) removed";
         return output;
 
     }
@@ -173,7 +173,7 @@ public class biblioThread extends Thread{
 		return false;
 	}
 
-	/*
+	
     public static ArrayList<book> findByAttribute(ArrayList<newBook> allBooks, String attribute, String value) {
         ArrayList<book> foundSet = new ArrayList<>();
         for (book newBook : allBooks) {
@@ -203,5 +203,5 @@ public class biblioThread extends Thread{
         if (foundSet.size() == 0)
             return null;
         return foundSet;
-    }*/
+    }
 }
