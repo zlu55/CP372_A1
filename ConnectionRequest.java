@@ -53,25 +53,24 @@ public class ConnectionRequest extends Thread {
             exception.printStackTrace();
         }
     }
+	
 
-    private String clientRequest(String[] data) {
-        final String request = data[0].trim();
-        /*
-        if(request == "SUBMIT"){
-            return //submitfunction
+    public void clientRequest(String req) {
+        
+        switch(req){
+            case "submit":
+				submitBook();
+				break;
+			case "get":
+				getBook();
+				break;
+            case "update":
+				updateBook();
+				break;
+			case "remove":
+				removeBook();
+				break;
         }
-        if(request == "GET"){
-            return //getfunction
-        }
-		if(request == "UPDATE"){
-            return //updatefunction
-        }
-		if(request == "REMOVE"){
-            return //removefunction
-        }else{
-            return "ERROR: Invalid request(Valid Requests: SUBMIT, GET, UPDATE, REMOVE)";
-        }*/
-		return "";
     }
 
 }

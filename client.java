@@ -171,6 +171,21 @@ public class client{
 		if(checkISBNValid(ISBN) == false){
 			outputBox.setText("Incorrect ISBN");
 		}
+		
+		checkRequest();
+		
+	}
+	
+	private void checkRequest(){
+		if (submitButton.isSelected() == true){
+			connectionRequest.clientRequest("submit");
+		}else if (getButton.isSelected() == true){
+			connectionRequest.clientRequest("get");
+		}else if (updateButton.isSelected() == true){
+			connectionRequest.clientRequest("update");
+		}else if (removeButton.isSelected() == true){
+			connectionRequest.clientRequest("remove");
+		}
 	}
 	
 	private boolean checkISBNValid(String isbn){
