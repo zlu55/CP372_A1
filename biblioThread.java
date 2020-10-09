@@ -205,4 +205,19 @@ public class biblioThread extends Thread{
             return null;
         return foundSet;
     }
+
+    public static ArrayList<book> search(ArrayList<ArrayList<book>> allBookList) {
+        ArrayList<book> search = null;
+        for (ArrayList<book> bookList : allBookList) {
+            search = search == null ? bookList : search;
+            if (search == null) break;
+            if (bookList != null)
+                search.retainAll(bookList);
+            else {
+                search = null;
+                break;
+            }
+        }
+        return search;
+    }
 }
