@@ -150,7 +150,7 @@ public class biblioThread extends Thread{
     private String removeBook(String[] data) {
         String output = "Book removed";
         int deleted = 0;
-        int yr = Integer.parseInt(data[5].trim());
+        /*int yr = Integer.parseInt(data[5].trim());
         if(checkISBN(data[1].trim())){
             for(book b : booklist){
                 outputBook = b.toString();
@@ -183,7 +183,7 @@ public class biblioThread extends Thread{
             }
         }
 
-	
+	*/
         output = deleted + " book(s) removed";
         return output;
 
