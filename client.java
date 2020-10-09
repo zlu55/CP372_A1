@@ -195,7 +195,7 @@ public class client{
 		}else if (updateButton.isSelected() == true){
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
-			removeWarning = new JOptionPane();
+			//removeWarning = new JOptionPane();
 			/*if(removeWarning.showConfirmDialog(
 				null,
 				"Are you sure you want to remove this book?", "",
@@ -206,6 +206,7 @@ public class client{
 				
 			}
 			*/
+			connectionRequest.clientRequest("remove", data);
 		}
 		 outputBox.setText(connectionRequest.returnedData());
 	}
