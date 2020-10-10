@@ -164,7 +164,10 @@ public class biblioThread extends Thread{
 
         ArrayList<book> toRemove = new ArrayList<book>();
         if((data[6].trim()).equals("ALL")){
-            bookList.removeAll(toRemove);
+            for(book b : bookList){
+                toRemove.add(b);  
+                deleted++; 
+            } 
         }else{
             for(book b : bookList){
                 if(checkISBN(data[1].trim())){
