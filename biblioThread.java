@@ -161,7 +161,7 @@ public class biblioThread extends Thread{
         String output = "";
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
-        book toRemove = new book();
+        ArrayList<book> toRemove = newArrayList();
         for(book b : bookList){
             if(checkISBN(data[1].trim())){
                 if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
