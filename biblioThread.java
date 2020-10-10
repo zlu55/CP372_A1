@@ -88,7 +88,7 @@ public class biblioThread extends Thread{
         int yr = Integer.parseInt(data[5].trim());
         if((data[6].trim()).equals("ALL")){
             for(book b : bookList){
-                outputBook = outputBook + b.toString() + "\n";
+                outputBook = outputBook + b.toString();
             }
         }else{
             for(book b : bookList){
@@ -161,7 +161,6 @@ public class biblioThread extends Thread{
         String output = "";
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
-        ArrayList<book> tokeep = new ArrayList<book>();
         ArrayList<book> toRemove = new ArrayList<book>();
         if((data[6].trim()).equals("ALL")){
             for(book b : bookList){
@@ -170,36 +169,41 @@ public class biblioThread extends Thread{
             } 
         }else{
             for(book b : bookList){
-                if(!(checkISBN(data[1].trim()))){
-                    if((data[2].trim()).equals("") || !(b.getTitle().equals((data[2].trim())))){
-                        if((data[3].trim()).equals("") || !(b.getAuthor().equals((data[3].trim())))){
-                            if((data[4].trim()).equals("") || !(b.getPublisher().equals((data[4].trim())))){
-                                if(yr == 0 || b.getYear() != yr){
-                                    tokeep.add(b);                
+                if(checkISBN(data[1].trim())){
+                    if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                        if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    toRemove.add(b);  
+                                    deleted++; 
                                 }
                             }
                         }
                     }
-                }else if(!(data[2].trim()).equals("") && !(b.getTitle().equals(data[2].trim()))){
-                    if((data[3].trim()).equals("") || !(b.getAuthor().equals((data[3].trim())))){
-                        if((data[4].trim()).equals("") || !(b.getPublisher().equals((data[4].trim())))){
-                            if(yr == 0 || b.getYear() != yr){
-                                tokeep.add(b);                
+                }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                            if(yr == 0 || b.getYear() == yr){
+                                toRemove.add(b);  
+                                deleted++; 
                             }
                         }
                     }
-                }else if(!(data[3].trim()).equals("") && !(b.getAuthor().equals(data[3].trim()))){
-                    if((data[4].trim()).equals("") || !(b.getPublisher().equals((data[4].trim())))){
-                        if(yr == 0 || b.getYear() != yr){
-                            tokeep.add(b);                
+                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                        if(yr == 0 || b.getYear() == yr){
+                            toRemove.add(b);  
+                            deleted++; 
                         }
                     }
-                }else if(!(data[4].trim()).equals("") && !(b.getPublisher().equals(data[4].trim()))){
-                    if(yr == 0 || b.getYear() != yr){
-                        tokeep.add(b);                
+                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                    if(yr == 0 || b.getYear() == yr){
+                        toRemove.add(b);  
+                        deleted++; 
                     }
-                }else if(yr != 0 && b.getYear() != (yr)){
-                    tokeep.add(b);               
+                }else if(yr != 0 && b.getYear() == (yr)){
+                    toRemove.add(b);  
+                    deleted++; 
                 }else{
                     return "Sorry, No books exist in the Library with those attributes.";
                 }
@@ -207,8 +211,7 @@ public class biblioThread extends Thread{
         }
 
         bookList.removeAll(toRemove);
-        booklist = tokeep;
-        output = "book(s) removed";
+        output = deleted + " book(s) removed";
 
         return output;
 
