@@ -93,7 +93,7 @@ public class biblioThread extends Thread{
             }
         }else{
             for(book b : bookList){
-                if(!(data[1].trim(0).equals("")){
+                if(!(data[1].trim().equals(""))){
                     if(b.getISBN().equals(data[1].trim())){
                         addBook = 1;
                     }else{
