@@ -165,6 +165,10 @@ public class client{
 			String pub = pubTxt.getText();
 			int year = 0;
 			String ISBN;
+			String all = "NOT";
+			if(allBox.isSelected()){
+				all = "ALL";
+			}
 			if(yearTxt.getText().length() > 0){
 				try{
 					year = Integer.parseInt(yearTxt.getText());
@@ -179,18 +183,18 @@ public class client{
 			
 			if((submitButton.isSelected() == true || updateButton.isSelected() == true) && ISBN.equals("")){
 				outputBox.setText("Enter an ISBN");
-			}else if(ISBN.equals("") && title.equals("") && author.equals("") && pub.equals("") && year == 0){
+			}else if(ISBN.equals("") && title.equals("") && author.equals("") && pub.equals("") && year == 0 && all.equals("NOT")){
 				outputBox.setText("Enter something");
 			}else{
-				checkRequest(ISBN, title, author, pub, year);
+				checkRequest(ISBN, title, author, pub, year, all);
 			}
 		}else{
 			outputBox.setText("No connection");
 		}
 	}
 	
-	private void checkRequest(String ISBN, String title, String author, String pub, int year){
-		Object[] data = {ISBN, title, author, pub, year};
+	private void checkRequest(String ISBN, String title, String author, String pub, int year, String all){
+		Object[] data = {ISBN, title, author, pub, year, all};
 		if (submitButton.isSelected() == true){
 			connectionRequest.clientRequest("submit", data);
 		}else if (getButton.isSelected() == true){

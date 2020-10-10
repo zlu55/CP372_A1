@@ -66,7 +66,7 @@ public class ConnectionRequest extends Thread {
 				sentData += "REMOVE\r\n";
 				break;
         }
-		for(int i=0; i<5; i++){
+		for(int i=0; i<6; i++){
 			sentData += (data[i]+ "\r\n");
 		}
 		out.println(sentData + "\r\n/END/");

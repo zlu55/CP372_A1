@@ -88,7 +88,7 @@ public class biblioThread extends Thread{
         int yr = Integer.parseInt(data[5].trim());
         if((data[6].trim()).equals("ALL")){
             for(book b : bookList){
-                outputBook = outputBook + b.toString()
+                outputBook = outputBook + b.toString();
             }
         }else{
             for(book b : bookList){
