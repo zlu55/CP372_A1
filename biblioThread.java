@@ -104,25 +104,45 @@ public class biblioThread extends Thread{
                         }
                     }
                 }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
-                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
-                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-                            if(yr == 0 || b.getYear() == yr){
-                                outputBook = outputBook + b.toString() + "\n";
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    outputBook = outputBook + b.toString() + "\n";
+                                }
                             }
                         }
                     }
                 }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
-                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-                        if(yr == 0 || b.getYear() == yr){
-                            outputBook = outputBook + b.toString() + "\n";
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    outputBook = outputBook + b.toString() + "\n";
+                                }
+                            }
                         }
                     }
                 }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
-                    if(yr == 0 || b.getYear() == yr){
-                        outputBook = outputBook + b.toString() + "\n";
-                    }
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){{
+                                if(yr == 0 || b.getYear() == yr){
+                                    outputBook = outputBook + b.toString() + "\n";
+                                }
+                            }
+                        }
+                    }        
                 }else if(yr != 0 && b.getYear() == (yr)){
-                    outputBook = outputBook + b.toString() + "\n";
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                                if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                    outputBook = outputBook + b.toString() + "\n";
+                                }
+                            }
+                        }
+                    }                
                 }
             }
         }
