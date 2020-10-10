@@ -204,14 +204,13 @@ public class client{
 		}else if (removeButton.isSelected() == true){
 			/*removeWarning = new JOptionPane();
 			int result = JOptionPane.showConfirmDialog(
-							null,
+							frame,
 							"Are you sure you want to remove this book?", "",
 							JOptionPane.YES_NO_OPTION,
-							JOptionPane.WARNING_MESSAGE,
-							removeWarning);
-			if(result == JOptionPane.YES_OPTION){
+							JOptionPane.WARNING_MESSAGE);
+			if(result == 0){
 					connectionRequest.clientRequest("remove", data);
-			}else if(result == JOptionPane.NO_OPTION){
+			}else{
 				outputBox.setText("Not removed");
 			}*/
 			
