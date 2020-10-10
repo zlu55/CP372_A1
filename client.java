@@ -202,19 +202,21 @@ public class client{
 		}else if (updateButton.isSelected() == true){
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
-			/*removeWarning = new JOptionPane();
+			removeWarning = new JOptionPane();
 			int result = JOptionPane.showConfirmDialog(
 							null,
 							"Are you sure you want to remove this book?", "",
 							JOptionPane.YES_NO_OPTION,
-							JOptionPane.WARNING_MESSAGE);
+							JOptionPane.WARNING_MESSAGE,
+							removeWarning);
 			if(result == JOptionPane.YES_OPTION){
 					connectionRequest.clientRequest("remove", data);
 			}else if(result == JOptionPane.NO_OPTION){
+				remove(removeWarning);
 				outputBox.setText("Not removed");
-			}*/
+			}
 			
-			connectionRequest.clientRequest("remove", data);
+			//connectionRequest.clientRequest("remove", data);
 		}
 		 outputBox.setText(connectionRequest.returnedData());
 	}
