@@ -134,21 +134,23 @@ public class biblioThread extends Thread{
 		String updatedBook = "";
 		if(checkISBN(data[1].trim())){
 			for(book b : bookList){
-				if(checkISBN(data[1].trim())){
-					if(!(data[2].trim()).equals("") && !b.getTitle().equals((data[2].trim()))){
-						b.setTitle(data[2].trim());
-					}
-					if(!(data[3].trim()).equals("") && !b.getAuthor().equals((data[3].trim()))){
-						b.setAuthor(data[3].trim());
-					}
-					if(!(data[4].trim()).equals("") && !b.getPublisher().equals((data[4].trim()))){
-						b.setPublisher(data[4].trim());
-					}
-					int yr = Integer.parseInt(data[5].trim());
-					if(yr != 0 && b.getYear() != yr){
-						b.setYear(yr);
-					}
+				if(!(data[1].trim()).equals("") && !b.getISBN().equals((data[1].trim()))){
+					b.setISBN(data[1].trim());
 				}
+				if(!(data[2].trim()).equals("") && !b.getTitle().equals((data[2].trim()))){
+					b.setTitle(data[2].trim());
+				}
+				if(!(data[3].trim()).equals("") && !b.getAuthor().equals((data[3].trim()))){
+					b.setAuthor(data[3].trim());
+				}
+				if(!(data[4].trim()).equals("") && !b.getPublisher().equals((data[4].trim()))){
+					b.setPublisher(data[4].trim());
+				}
+				int yr = Integer.parseInt(data[5].trim());
+				if(yr != 0 && b.getYear() != yr){
+					b.setYear(yr);
+				}
+				
 				updatedBook = b.toString();
 			}
 			return "Book updated\n" + updatedBook;
@@ -211,6 +213,7 @@ public class biblioThread extends Thread{
         }
 
         bookList.removeAll(toRemove);
+
         output = deleted + " book(s) removed";
 
         return output;

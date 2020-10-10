@@ -203,14 +203,14 @@ public class client{
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
 			/*removeWarning = new JOptionPane();
-			//removeWarning.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-			int result = removeWarning.showConfirmDialog(
+			int result = JOptionPane.showConfirmDialog(
 							frame,
 							"Are you sure you want to remove this book?", "",
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.WARNING_MESSAGE);
-			if(result == 0){
+							JOptionPane.YES_NO_OPTION);
+			if(result == JOptionPane.YES_OPTION){
 					connectionRequest.clientRequest("remove", data);
+			}else if(result == JOptionPane.NO_OPTION){
+				outputBox.setText("Not removed");
 			}else{
 				outputBox.setText("Not removed");
 			}*/
