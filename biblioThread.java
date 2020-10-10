@@ -104,7 +104,7 @@ public class biblioThread extends Thread{
                         }
                     }
                 }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
-                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim())){
                         if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                             if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                                 if(yr == 0 || b.getYear() == yr){
@@ -114,7 +114,7 @@ public class biblioThread extends Thread{
                         }
                     }
                 }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
-                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim())){
                         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
                             if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                                 if(yr == 0 || b.getYear() == yr){
@@ -124,7 +124,7 @@ public class biblioThread extends Thread{
                         }
                     }
                 }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
-                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim())){
                         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
                             if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){{
                                 if(yr == 0 || b.getYear() == yr){
@@ -134,7 +134,7 @@ public class biblioThread extends Thread{
                         }
                     }        
                 }else if(yr != 0 && b.getYear() == (yr)){
-                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim())){
                         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
                             if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                                 if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
@@ -144,10 +144,12 @@ public class biblioThread extends Thread{
                         }
                     }                
                 }
-            }
-        }
-        return outputBook;
-    }
+			}
+			}
+		}
+       return outputBook;
+	}
+	
 	
 	public String updateBook(String[] data){
 		String updatedBook = "";
