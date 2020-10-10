@@ -126,7 +126,7 @@ public class biblioThread extends Thread{
                 }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
                     if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
                         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
-                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){{
+                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                                 if(yr == 0 || b.getYear() == yr){
                                     outputBook = outputBook + b.toString() + "\n";
                                 }
@@ -146,6 +146,7 @@ public class biblioThread extends Thread{
                 }
             }
         }
+
         return outputBook;
     }
 	
@@ -197,37 +198,55 @@ public class biblioThread extends Thread{
                             if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                                 if(yr == 0 || b.getYear() == yr){
                                     toRemove.add(b);  
-                                    deleted++; 
+                                    deleted++;      
                                 }
                             }
                         }
                     }
                 }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
-                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
-                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-                            if(yr == 0 || b.getYear() == yr){
-                                toRemove.add(b);  
-                                deleted++; 
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    toRemove.add(b);  
+                                    deleted++;      
+                                }
                             }
                         }
                     }
                 }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
-                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-                        if(yr == 0 || b.getYear() == yr){
-                            toRemove.add(b);  
-                            deleted++; 
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    toRemove.add(b);  
+                                    deleted++;      
+                                }
+                            }
                         }
                     }
                 }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
-                    if(yr == 0 || b.getYear() == yr){
-                        toRemove.add(b);  
-                        deleted++; 
-                    }
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    toRemove.add(b);  
+                                    deleted++;      
+                                }
+                            }
+                        }
+                    }        
                 }else if(yr != 0 && b.getYear() == (yr)){
-                    toRemove.add(b);  
-                    deleted++; 
-                }else{
-                    output = "Sorry, No books exist in the Library with those attributes.";
+                    if((data[1].trim()).equals("") || b.getISBN().equals(data[1].trim()))){
+                        if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                            if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                                if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                    toRemove.add(b);  
+                                    deleted++;      
+                                }
+                            }
+                        }
+                    }                
                 }
             }
         }
