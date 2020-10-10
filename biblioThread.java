@@ -99,7 +99,7 @@ public class biblioThread extends Thread{
                     }else{
                         addBook = 0;
                     }
-                }else if(!(data[2].trim()).equals("")){
+                }if(!(data[2].trim()).equals("")){
                     if(b.getTitle().equals((data[2].trim()))){
                         if(addBook != 0){
                            addBook = 1; 
@@ -107,7 +107,7 @@ public class biblioThread extends Thread{
                     }else{
                         addBook = 0;
                     }
-                }else if(!(data[3].trim()).equals("")){
+                }if(!(data[3].trim()).equals("")){
                     if(b.getAuthor().equals((data[3].trim()))){
                         if(addBook != 0){
                            addBook = 1; 
@@ -115,8 +115,7 @@ public class biblioThread extends Thread{
                     }else{
                         addBook = 0;
                     }
-
-                }else if(!(data[4].trim()).equals("")){
+                }if(!(data[4].trim()).equals("")){
                     if(b.getPublisher().equals((data[4].trim()))){
                         if(addBook != 0){
                            addBook = 1; 
@@ -124,7 +123,7 @@ public class biblioThread extends Thread{
                     }else{
                         addBook = 0;
                     }
-                }else if(yr != 0){
+                }if(yr != 0){
                     if(b.getYear() == yr){
                         if(addBook != 0){
                            addBook = 1; 
