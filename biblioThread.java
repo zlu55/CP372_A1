@@ -161,7 +161,6 @@ public class biblioThread extends Thread{
         String output = "";
         int deleted = 0;
         int yr = Integer.parseInt(data[5].trim());
-
         ArrayList<book> toRemove = new ArrayList<book>();
         if((data[6].trim()).equals("ALL")){
             for(book b : bookList){
@@ -182,7 +181,6 @@ public class biblioThread extends Thread{
                         }
                     }
                 }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
-
                     if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
                         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
                             if(yr == 0 || b.getYear() == yr){
