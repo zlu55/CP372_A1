@@ -134,9 +134,11 @@ public class biblioThread extends Thread{
 		String updatedBook = "";
 		if(checkISBN(data[1].trim())){
 			for(book b : bookList){
-				if(!(data[1].trim()).equals("") && !b.getISBN().equals((data[1].trim()))){
+				if(!(data[1].trim()).equals("") && b.getISBN().equals((data[1].trim()))){
+					System.out.println(b.toString());
 					if(!(data[2].trim()).equals("") && !b.getTitle().equals((data[2].trim()))){
 						b.setTitle(data[2].trim());
+						System.out.println("New title: "+data[2]);
 					}
 					if(!(data[3].trim()).equals("") && !b.getAuthor().equals((data[3].trim()))){
 						b.setAuthor(data[3].trim());
@@ -148,9 +150,9 @@ public class biblioThread extends Thread{
 					if(yr != 0 && b.getYear() != yr){
 						b.setYear(yr);
 					}
+					updatedBook = b.toString();
+					break;
 				}
-				
-				updatedBook = b.toString();
 			}
 			return "Book updated\n" + updatedBook;
 		}else{
