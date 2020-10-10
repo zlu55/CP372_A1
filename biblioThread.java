@@ -139,7 +139,7 @@ public class biblioThread extends Thread{
                 if(addBook == 1){
                     outputBook = outputBook + b.toString() + "\n";
                 }
-                int addBook = 2;
+                addBook = 2;
             }
             //     if(!(data[1].trim()).equals("") && b.getISBN().equals(data[1].trim())){
             //         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
