@@ -203,7 +203,8 @@ public class client{
 			connectionRequest.clientRequest("update", data);
 		}else if (removeButton.isSelected() == true){
 			/*removeWarning = new JOptionPane();
-			int result = JOptionPane.showConfirmDialog(
+			//removeWarning.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			int result = removeWarning.showConfirmDialog(
 							frame,
 							"Are you sure you want to remove this book?", "",
 							JOptionPane.YES_NO_OPTION,
@@ -216,7 +217,7 @@ public class client{
 			
 			connectionRequest.clientRequest("remove", data);
 		}
-		 outputBox.setText(connectionRequest.returnedData());
+		outputBox.setText(connectionRequest.returnedData());
 	}
 	
 	private boolean checkISBNValid(String isbn){
