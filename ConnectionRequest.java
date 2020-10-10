@@ -13,8 +13,8 @@ public class ConnectionRequest extends Thread {
 			socket.connect(new InetSocketAddress(IPAddress, portNum), 3000);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
-		}catch(Exception e){
-			System.out.println(e);
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
     

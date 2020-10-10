@@ -113,7 +113,7 @@ public class client{
 		authorLbl = new JLabel("Author: ");
 		yearLbl = new JLabel("Year: ");
 		ISBNLbl.setAlignmentY(Component.RIGHT_ALIGNMENT);
-		ISBNTxt = new JTextField("978-1-61268-019-4");/////////////////////////FIX/REMOVE TEST ISBN
+		ISBNTxt = new JTextField("");
 		titleTxt = new JTextField("");
 		authorTxt = new JTextField("");
 		pubTxt = new JTextField("");
