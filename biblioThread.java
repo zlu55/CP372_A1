@@ -93,87 +93,38 @@ public class biblioThread extends Thread{
             }
         }else{
             for(book b : bookList){
-                if(!(data[1].trim().equals(""))){
-                    if(b.getISBN().equals(data[1].trim())){
-                        addBook = 1;
-                    }else{
-                        addBook = 0;
+                if(!(data[1].trim()).equals("") && b.getISBN().equals(data[1].trim())){
+                    if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
+                        if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                            if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                                if(yr == 0 || b.getYear() == yr){
+                                    outputBook = outputBook + b.toString() + "\n";
+                                }
+                            }
+                        }
                     }
-                }if(!(data[2].trim()).equals("")){
-                    if(b.getTitle().equals((data[2].trim()))){
-                        if(addBook != 0){
-                           addBook = 1; 
-                        } 
-                    }else{
-                        addBook = 0;
+                }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
+                    if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
+                        if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                            if(yr == 0 || b.getYear() == yr){
+                                outputBook = outputBook + b.toString() + "\n";
+                            }
+                        }
                     }
-                }if(!(data[3].trim()).equals("")){
-                    if(b.getAuthor().equals((data[3].trim()))){
-                        if(addBook != 0){
-                           addBook = 1; 
-                        } 
-                    }else{
-                        addBook = 0;
+                }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
+                    if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
+                        if(yr == 0 || b.getYear() == yr){
+                            outputBook = outputBook + b.toString() + "\n";
+                        }
                     }
-                }if(!(data[4].trim()).equals("")){
-                    if(b.getPublisher().equals((data[4].trim()))){
-                        if(addBook != 0){
-                           addBook = 1; 
-                        } 
-                    }else{
-                        addBook = 0;
+                }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
+                    if(yr == 0 || b.getYear() == yr){
+                        outputBook = outputBook + b.toString() + "\n";
                     }
-                }if(yr != 0){
-                    if(b.getYear() == yr){
-                        if(addBook != 0){
-                           addBook = 1; 
-                        } 
-                    }else{
-                        addBook = 0;
-                    }
-                }else{
-                   outputBook = "Sorry, No books exist in the Library with those attributes."; 
-                }
-
-                if(addBook == 1){
+                }else if(yr != 0 && b.getYear() == (yr)){
                     outputBook = outputBook + b.toString() + "\n";
                 }
-                addBook = 2;
             }
-            //     if(!(data[1].trim()).equals("") && b.getISBN().equals(data[1].trim())){
-            //         if((data[2].trim()).equals("") || b.getTitle().equals((data[2].trim()))){
-            //             if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
-            //                 if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-            //                     if(yr == 0 || b.getYear() == yr){
-            //                         outputBook = outputBook + b.toString() + "\n";
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }else if(!(data[2].trim()).equals("") && b.getTitle().equals(data[2].trim())){
-            //         if((data[3].trim()).equals("") || b.getAuthor().equals((data[3].trim()))){
-            //             if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-            //                 if(yr == 0 || b.getYear() == yr){
-            //                     outputBook = outputBook + b.toString() + "\n";
-            //                 }
-            //             }
-            //         }
-            //     }else if(!(data[3].trim()).equals("") && b.getAuthor().equals(data[3].trim())){
-            //         if((data[4].trim()).equals("") || b.getPublisher().equals((data[4].trim()))){
-            //             if(yr == 0 || b.getYear() == yr){
-            //                 outputBook = outputBook + b.toString() + "\n";
-            //             }
-            //         }
-            //     }else if(!(data[4].trim()).equals("") && b.getPublisher().equals(data[4].trim())){
-            //         if(yr == 0 || b.getYear() == yr){
-            //             outputBook = outputBook + b.toString() + "\n";
-            //         }
-            //     }else if(yr != 0 && b.getYear() == (yr)){
-            //         outputBook = outputBook + b.toString() + "\n";
-            //     }else{
-            //         return "Sorry, No books exist in the Library with those attributes.";
-            //     }
-            // }
         }
         return outputBook;
     }
